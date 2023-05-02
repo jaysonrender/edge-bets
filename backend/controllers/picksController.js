@@ -89,8 +89,8 @@ async function getAllPlayersPicksAndScores(request, response) {
                 "user_id": 126,
                 "username": "jayson",
                 "fullname": "Jayson Render",
-                "score": 0,
-                "player_rank": null,
+                "score": -16,
+                "player_rank": 3,
                 "picks": [
                     {
                         "pick_week": 4,
@@ -101,6 +101,16 @@ async function getAllPlayersPicksAndScores(request, response) {
                         "pick2_name": "Baltimore Ravens",
                         "pick2_score": -3,
                         "week_total": 0
+                    },
+                    {
+                        "pick_week": 5,
+                        "pick1": "MIA",
+                        "pick1_name": "Miami Dolphins",
+                        "pick1_score": -23,
+                        "pick2": "MIN",
+                        "pick2_name": "Minnesota Vikings",
+                        "pick2_score": 7,
+                        "week_total": -16
                     }
                 ]
             }
