@@ -21,7 +21,7 @@ const Leaderboard = () => {
         }
 
         fetchLeaders();
-    }, []);
+    }, [leagueID, userToken]);
 
     return (
         <div className="container">

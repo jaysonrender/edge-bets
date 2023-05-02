@@ -68,9 +68,9 @@ const Scoreboard = () => {
                     row.push(
                         <>
                             <td className='table-week-column'>{player.picks[i].pick_week}</td>
-                            <td>{player.picks[i].pick1}</td>
+                            <td><strong>{player.picks[i].pick1}</strong></td>
                             <td className='table-score-column'>{player.picks[i].pick1_score}</td>
-                            <td>{player.picks[i].pick2}</td>
+                            <td><strong>{player.picks[i].pick2}</strong></td>
                             <td className='table-score-column'>{player.picks[i].pick2_score}</td>
                             <td className='table-total-column'>{player.picks[i].week_total}</td>
                         </>
@@ -82,9 +82,9 @@ const Scoreboard = () => {
                     row.push(
                         <>
                             <td className='table-week-column'>{player.picks[index].pick_week}</td>
-                            <td>{player.picks[index].pick1}</td>
+                            <td><strong>{player.picks[index].pick1}</strong></td>
                             <td className='table-score-column'>{player.picks[index].pick1_score}</td>
-                            <td>{player.picks[index].pick2}</td>
+                            <td><strong>{player.picks[index].pick2}</strong></td>
                             <td className='table-score-column'>{player.picks[index].pick2_score}</td>
                             <td className='table-total-column'>{player.picks[index].week_total}</td>
 

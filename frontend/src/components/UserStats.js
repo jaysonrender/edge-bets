@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 const UserStats = () => {
-    const {username, leagueID, userID, userToken } = useUserContext();
+    const {leagueID, userID, userToken } = useUserContext();
 
     const [name, setName] = useState(null);
     const [score, setScore] = useState(null);
