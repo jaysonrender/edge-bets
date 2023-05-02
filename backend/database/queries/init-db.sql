@@ -28,11 +28,12 @@ CREATE TABLE IF NOT EXISTS teams (
 	
     alias VARCHAR(3) PRIMARY KEY,
     team_name VARCHAR(40),
+	-- image (file path for team logo image)
 
 );
 
 CREATE TABLE IF NOT EXISTS pick_list (
-	user_id INT , -- SET EQUAL TO users.user_id AT ALL TIMES
+	user_id INT , 
     pick_week INT,
     pick1 VARCHAR(3),
     pick2 VARCHAR(3)
@@ -70,21 +71,7 @@ ALTER TABLE game_schedule
 	ADD FOREIGN KEY (home) REFERENCES teams(alias) ON UPDATE CASCADE,
     ADD FOREIGN KEY (away) REFERENCES teams(alias) ON UPDATE CASCADE;
 
--- Query to update users scores when scores table is updated 
-CREATE TRIGGER update_user_score
-	AFTER INSERT ON scores
-    FOR EACH ROW
-	UPDATE users 
-		Join
-		(SELECT p.user_id as id, SUM(s1.score + s2.score) as total FROM pick_list p
-		LEFT JOIN scores s1
-			ON p.pick1 = s1.team_alias AND p.pick_week = s1.nfl_week
-		LEFT JOIN scores s2
-			ON p.pick2 = s2.team_alias AND p.pick_week = s2.nfl_week
-		GROUP BY p.user_id
-        ) points on users.user_id = points.id
-		set score = points.total
-    ;
+
 
 CREATE VIEW user_score_and_rank AS (
     SELECT league_id, username, fname, lname, score, player_rank FROM users
@@ -100,6 +87,7 @@ CREATE VIEW user_score_and_picks AS
 		ON p.pick2 = s2.team_alias and p.pick_week = s2.nfl_week)
 	;
     
+-- Query to update users scores and ranks when scores table is updated 
 delimiter //
 CREATE TRIGGER update_user_score_rank
 	AFTER INSERT ON scores
@@ -123,6 +111,7 @@ CREATE TRIGGER update_user_score_rank
     
 // delimiter ;
 
+--Create a root league and user for dev/testing
 INSERT INTO leagues VALUES('ABCDEF', 'root_league', NULL);
 INSERT INTO users values(1, 'ABCDEF', 'root', 'user', 'root', SHA2('password', 256), 'email@email.com', 'root', 0, 0, 4);
 INSERT INTO pick_list VALUES(1, NULL, NULL, NULL);
