@@ -9,11 +9,14 @@ const router = express.Router();
 //require authorization for all pick/game related routes
 router.use(requireAuth);
 
+//HTTP GET requests
 router.get('/games/:pickWeek', getGamesByWeek);
 router.get('/scoreboard/:leagueID', getAllPlayersPicksAndScores);
 router.get('/:userID', getUserPicks);
 router.get('/stats/:leagueID/:userID', getUserStats);
 router.get('/leagueLeaders/:leagueID', getLeagueLeaders);
+
+//POST restquests
 router.post('/submitPick', submitPick);
 
 router.delete('/', (req, res) => {
