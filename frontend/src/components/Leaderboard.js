@@ -36,6 +36,7 @@ const Leaderboard = () => {
                 <tbody>
                     {leaders && leaders.map((leader) => {
                         return (
+                            
                             <tr key={leader.user_id}>
                                 <td>{leader.player_rank}</td>
                                 <td>{leader.fname + " " + leader.lname}</td>

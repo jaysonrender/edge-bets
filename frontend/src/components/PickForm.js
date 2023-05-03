@@ -33,7 +33,10 @@ const PickForm = () => {
 
 
         if (isSameGame(pick1, pick2)) {
-            setResponse('You cannot pick two teams that are playing against each other')
+            setResponse('You cannot pick two teams that are playing against each other');
+        }
+        else if (pick1 === pick2){
+            setResponse('You must pick two seperate teams');
         }
         else {
             const picks = { userID, pickWeek, pick1, pick2, flexPickStatus };
