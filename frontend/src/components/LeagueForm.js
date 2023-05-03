@@ -16,17 +16,23 @@ const LeagueForm = () => {
         event.preventDefault();
         const requestBody = { leagueName };
 
-        const response = await axios.post('api/user/create-league', requestBody).catch(error => {
+        await axios.post('api/user/create-league', requestBody).then(response => {
+            if (response.status === 200) {
+                setLeagueID(response.data.leagueID);
+                setError(null);
+            }
+            else {
+                setError(response.data.message)
+            }
+        }
+
+        ).catch(error => {
+
             setError(error.response.data.message)
+            console.log(error);
         });
 
-        if (response.status === 200) {
-            setLeagueID(response.data.leagueID);
-            setError(null);
-        }
-        else {
-            setError(response.data.message)
-        }
+        
 
     }
     const navigateLogin = () => {
@@ -52,6 +58,7 @@ const LeagueForm = () => {
                                 <input type="text" className='form-control' onChange={(event) => setLeagueName(event.target.value)}></input>
                             </div>
                         </div>
+                        {error && <div>{error}</div>}
                         <br />
                         <div className='row'>
                             <div className='col'>
@@ -71,7 +78,7 @@ const LeagueForm = () => {
 
 
 
-                {error && <div>{error}</div>}
+                
 
                 {/*if league is successfully created display League ID and how to share */}
                 {leagueID &&

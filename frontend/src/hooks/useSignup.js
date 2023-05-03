@@ -12,7 +12,7 @@ export const useSignup = () => {
         const requestBody = {leagueID, fname, lname, username, password, email, userType };
         
         await axios.post('api/user/join-league', requestBody).then(response => {
-            console.log(response)
+            
             setError(response.data.message)
             if (response.status === 200){
                 localStorage.setItem('user', JSON.stringify(response.data.userToken));

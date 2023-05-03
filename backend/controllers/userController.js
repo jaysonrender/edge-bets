@@ -179,7 +179,7 @@ async function joinLeague(request, response) {
 async function createLeague(request, response) {
 
     const { leagueName } = request.body;
-    if (leagueName !== null) {
+    if (leagueName !== null && leagueName !== "") {
         const db = await createConnection();
 
         //get league IDs to check if league already exists
@@ -193,7 +193,7 @@ async function createLeague(request, response) {
 
 
         if (leagueResults.some((element) => leagueName === element.league_name)) {
-            response.status(400).json({ teamExists: true, errorMessage: "League already exists with this name" })
+            response.status(400).json({ teamExists: true, message: "League already exists with this name" })
         } else {
             const setQuery = fs.readFileSync('./database/queries/addLeague.sql', 'utf8');
 
