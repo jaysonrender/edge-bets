@@ -24,6 +24,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
           <Routes>
+
+            {/*if a valid userToken is present, user has access to home, games, picks, standings, etc otherwise they are redirected to login pages */}
             <Route path='/' element={!userToken ? <Login /> : <Navigate to='/home' />} />
             
             <Route path='/signup' element={!userToken ? <Signup /> : <Navigate to='/home' />} 
