@@ -122,7 +122,7 @@ const Scoreboard = () => {
     //useEffect is call right when this element renders
     useEffect(() => {
         const fetchScores = async () => {
-            const url = '/api/pick/scoreboard/'.concat(leagueID);
+            const url = `${process.env.REACT_APP_BACKEND}/api/pick/scoreboard/${leagueID}`;
             const { data } = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`

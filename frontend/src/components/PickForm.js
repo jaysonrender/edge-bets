@@ -41,7 +41,7 @@ const PickForm = () => {
         else {
             const picks = { userID, pickWeek, pick1, pick2, flexPickStatus };
 
-            await axios.post('/api/pick/submitPick', picks, {
+            await axios.post(`${process.env.REACT_APP_BACKEND}/api/pick/submitPick`, picks, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 }
@@ -66,7 +66,7 @@ const PickForm = () => {
     useEffect(() => {
         const fetchGames = async () => {
 
-            const url = `/api/pick/games/${pickWeek}`;
+            const url = `${process.env.REACT_APP_BACKEND}/api/pick/games/${pickWeek}`;
             const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`

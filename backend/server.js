@@ -1,8 +1,10 @@
 
 //package for using .env variables
 require('dotenv').config()
+
 //package for running javascript server
 const express = require('express');
+const cors = require('cors');
 const createConnection = require('./database/dbConnect');
 const initSportsData = require('./database/initSportsData');
 
@@ -30,6 +32,7 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 
 app.use(express.json()); //middleware for parsing json
+app.use(cors());
 app.use('/api/pick', pickRoutes); //middleware for handling picks and game information
 app.use('/api/user', userRoutes); //middleware for handling users and user info
 

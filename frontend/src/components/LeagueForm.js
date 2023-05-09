@@ -18,7 +18,7 @@ const LeagueForm = () => {
         event.preventDefault();
         const requestBody = { leagueName };
 
-        await axios.post('api/user/create-league', requestBody).then(response => {
+        await axios.post(`${process.env.REACT_APP_BACKEND}/api/user/create-league`, requestBody).then(response => {
             if (response.status === 200) {
                 setLeagueID(response.data.leagueID);
                 setError(null);

@@ -2,6 +2,7 @@
 const createConnection = require('../database/dbConnect');
 const fs = require('fs');
 const getCurrentWeek = require('../util/getCurrentWeek');
+require('dotenv').config();
 
 //GET methods
 async function getUserStats(request, response) {
@@ -126,6 +127,7 @@ async function getAllPlayersPicksAndScores(request, response) {
 
 async function getGamesByWeek(request, response) {
     const { pickWeek } = request.params;
+
     const db = await createConnection();
 
     const query = fs.readFileSync('./database/queries/getGamesByWeek.sql', 'utf8');
@@ -175,7 +177,9 @@ async function getLeagueLeaders(request, response) {
 
 //POST methods
 async function submitPick(request, response) {
+
     const { userID, pickWeek, pick1, pick2, flexPickStatus } = request.body;
+
     const db = await createConnection();
 
 

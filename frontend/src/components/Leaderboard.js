@@ -4,14 +4,14 @@ import axios from 'axios';
 import { useUserContext } from "../hooks/useUserContext";
 
 const Leaderboard = () => {
-    const [leaders, setLeaders] = useState(null);
+    const [leaders, setLeaders] = useState([]);
 
     const { leagueID, userToken } = useUserContext();
 
 
     useEffect(() => {
         const fetchLeaders = async () => {
-            const url = `/api/pick/leagueLeaders/${leagueID}`;
+            const url = `${process.env.REACT_APP_BACKEND}/api/pick/leagueLeaders/${leagueID}`;
             const { data } = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
@@ -22,6 +22,7 @@ const Leaderboard = () => {
         }
 
         fetchLeaders();
+        
     }, [leagueID, userToken]);
 
     return (

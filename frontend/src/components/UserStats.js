@@ -14,7 +14,7 @@ const UserStats = () => {
 
     useEffect(() => {
         const fetchUserStats = async () => {
-            const url = `/api/pick/stats/${leagueID}/${userID}`;
+            const url = `${process.env.REACT_APP_BACKEND}/api/pick/stats/${leagueID}/${userID}`;
             const {data} = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`

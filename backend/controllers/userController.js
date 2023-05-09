@@ -4,6 +4,7 @@ const generateLeagueCode = require('../util/generateLeagueCode');
 const encryptPassword = require('../util/encryptPassword');
 const validator = require('validator');
 const createToken = require('../util/generateJWT');
+require('dotenv').config();
 
 //utility function for loginUser
 async function validateUser(username, password) {
@@ -83,7 +84,8 @@ async function loginUser(request, response) {
                 });
                 const leagueName = result[0].league_name;
                 //this information is kept in the User Context that React uses throughout components in frontend
-                response.status(200).json({ leagueID: user.league_id, userID: user.user_id, leagueName: leagueName, username: user.username, userToken: token, message: "Successful login" });
+                const userContext = { leagueID: user.league_id, userID: user.user_id, leagueName: leagueName, username: user.username, userToken: token, message: "Successful login" };
+                response.status(200).json(userContext);
 
             } catch (error) {
                 response.status(400).json({ error: error, message: error.message });
@@ -98,9 +100,8 @@ async function loginUser(request, response) {
 };
 
 async function joinLeague(request, response) {
-    // console.log(request.body);
-    const { leagueID, fname, lname, username, password, email, userType } = request.body;
 
+    const { leagueID, fname, lname, username, password, email, userType } = request.body;
 
     const db = await createConnection();
 
