@@ -14,7 +14,6 @@ export const useLogin = () => {
         await axios.post(`${process.env.REACT_APP_BACKEND}/api/user/login`, requestBody).then(response => {
             
             if (response.status === 200){
-                setError(response.data.message)
                 localStorage.setItem('user', JSON.stringify(response.data));
                 
                 //dispatch updates UserContext
