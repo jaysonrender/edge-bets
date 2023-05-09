@@ -17,7 +17,6 @@ export const useLogin = () => {
                 localStorage.setItem('user', JSON.stringify(response.data));
                 
                 //dispatch updates UserContext
-                
                 dispatch({type: 'LOGIN', leagueID: response.data.leagueID, userID: response.data.userID, leagueName: response.data.leagueName, username: response.data.username, userToken: response.data.userToken});
                 setError(response.data.message);
 

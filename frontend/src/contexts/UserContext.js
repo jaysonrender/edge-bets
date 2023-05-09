@@ -1,3 +1,5 @@
+//updates User state for frontend and caches relevant or frequently queried information about user to reduce the need for database connections
+
 import {createContext, useReducer, useEffect } from 'react';
 
 

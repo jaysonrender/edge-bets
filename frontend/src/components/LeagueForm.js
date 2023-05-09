@@ -1,3 +1,6 @@
+//Form for creating a league
+//Once league is created renders a SignupForm component
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

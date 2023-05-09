@@ -1,3 +1,5 @@
+//Leaderboard gets the scores of the 5 prospective winners and renders them in a table
+
 import { useState, useEffect } from "react";
 import axios from 'axios';
 

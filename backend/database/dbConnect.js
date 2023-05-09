@@ -1,3 +1,5 @@
+// a utility function used by controller functions to make database queries
+
 require('dotenv').config()
 
 async function createConnection() {

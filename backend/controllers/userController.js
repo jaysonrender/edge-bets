@@ -65,25 +65,28 @@ async function setLeagueAdmin(username, leagueID) {
 async function loginUser(request, response) {
     const { username, password } = request.body;
 
-    //if either field is empty
-    if (Object.values(request.body).includes("")) {
+    //if username or password fields aren't filled
+    if (Object.values(request.body).includes("") || Object.values(request.body).includes(null)) {
         response.status(400).json({ errorMessage: "All fields must be filled" });
     } else {
+        //SHA-256 encryption
         const passwordHash = encryptPassword(password);
         const user = await validateUser(username, passwordHash);
-
+        
         if (user.user_id) {
+
+            //JSON Web Token will be used to authenticate users in frontend
             const token = createToken(user.league_id, user.user_id);
             const db = await createConnection();
 
             try {
-                //get leagueName to add to User context in frontend
+                //get leagueName to add to UserContext in frontend
                 const getLeagueByID = fs.readFileSync('./database/queries/getLeagueByID.sql', 'utf8');
                 const [result] = await db.execute(getLeagueByID, [user.league_id], (error, result, field) => {
                     if (error) console.log(error);
                 });
                 const leagueName = result[0].league_name;
-                //this information is kept in the User Context that React uses throughout components in frontend
+                //this information is kept in the UserContext that React uses throughout components in frontend
                 const userContext = { leagueID: user.league_id, userID: user.user_id, leagueName: leagueName, username: user.username, userToken: token, message: "Successful login" };
                 response.status(200).json(userContext);
 
@@ -166,6 +169,7 @@ async function joinLeague(request, response) {
                 const leagueName = leagueResult.league_name;
                 const userID = result.insertId;
 
+                //JSON Web Token will be used to authenticate users in frontend
                 const token = createToken(leagueID, userID);
                 response.status(200).json({ leagueID: leagueID, userID: userID, leagueName: leagueName, username: username, userToken: token, message: 'User Successfully Joined!' });
             } catch (error) {

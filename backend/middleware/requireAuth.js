@@ -1,9 +1,11 @@
+//runs before anything in picksController
+//if user is not logged in or doesn't have valid JSON Web Token, they won't be able to make calls to backend API
+
 const jwt = require('jsonwebtoken');
 const createConnection = require('../database/dbConnect');
 const fs = require('fs');
 
-//runs before anything in picksController
-//if user is not logged in or doesn't have valid JSON Web Token, they won't be able to make calls to backend API
+
 async function requireAuth(request, response, next) {
     const {authorization } = request.headers;
 

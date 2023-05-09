@@ -1,3 +1,6 @@
+//sets URLs for any HTTP request method to backend API
+//userRoutes handles requests involving user login/signup and creating a league
+
 const express = require('express');
 
 const {loginUser, joinLeague, createLeague } = require('../controllers/userController');

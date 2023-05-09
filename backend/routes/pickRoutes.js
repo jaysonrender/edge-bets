@@ -1,3 +1,6 @@
+//sets URLs for any HTTP request method to backend API
+//pickRoutes handles requests for league, game, and user score data
+
 const express = require('express');
 const createConnection = require('../database/dbConnect');
 const { submitPick, getAllPlayersPicksAndScores, getUserPicks, getUserStats, getGamesByWeek, getLeagueLeaders } = require('../controllers/picksController');

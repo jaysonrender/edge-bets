@@ -3,6 +3,7 @@ import axios from 'axios';
 import getCurrentWeek from '../util/getCurrentWeek';
 import WeekOptions from './WeekOptions';
 import { useUserContext } from '../hooks/useUserContext';
+import { useSubmitPick } from '../hooks/useSubmitPick';
 
 
 
@@ -14,6 +15,7 @@ const PickForm = () => {
     const [games, setGames] = useState(null);
     const [flexPickStatus, setFlexPickStatus] = useState(false);
     const [response, setResponse] = useState(null);
+    const {submitPick, error} = useSubmitPick();
 
     const { userID, userToken } = useUserContext();
 
@@ -39,27 +41,7 @@ const PickForm = () => {
             setResponse('You must pick two seperate teams');
         }
         else {
-            const picks = { userID, pickWeek, pick1, pick2, flexPickStatus };
-
-            await axios.post(`${process.env.REACT_APP_BACKEND}/api/pick/submitPick`, picks, {
-                headers: {
-                    'Authorization': `Bearer ${userToken}`
-                }
-            }).then(response => setResponse(response.data.message))
-                .catch((error) => {
-                    setResponse(error.response.data.message);
-                });
-
-            //TODO: HANDLE FLEX PICKS
-            //get users picks
-            //if user already made pick, response has message/alert
-            //do you want to use flex pick?
-            //if yes
-            //setFlexPickStatus(true)
-            //resend post request
-            //else
-            //message: select other team
-            //reset pick1 or pick2 (which ever pick triggered flex pick) 
+            await submitPick({userToken, userID, pickWeek, pick1, pick2, flexPickStatus})
         }
     }
 
@@ -120,7 +102,7 @@ const PickForm = () => {
                 </select>
                 <button type='submit'>Submit Pick</button>
             </form>
-            {response && <div>{response}</div>}
+            {error && <div>{error}</div>}
         </div>
     )
 }

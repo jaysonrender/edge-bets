@@ -5,6 +5,7 @@ const getCurrentWeek = require('../util/getCurrentWeek');
 require('dotenv').config();
 
 //GET methods
+
 async function getUserStats(request, response) {
     const { leagueID, userID } = request.params;
 
@@ -17,6 +18,7 @@ async function getUserStats(request, response) {
         });
         db.unprepare(statsQuery);
 
+        //users stats
         response.status(200).json({
             fullname: result[0].fname + ' ' + result[0].lname,
             score: result[0].score,
@@ -43,6 +45,32 @@ async function getUserPicks(request, response) {
 
         db.unprepare(picksQuery);
         response.status(200).json(pickResults);
+
+        /**
+         * Example Array of pickResults
+         * [
+                    {
+                        "pick_week": 4,
+                        "pick1": "ATL",
+                        "pick1_name": "Atlanta Falcons",
+                        "pick1_score": 3,
+                        "pick2": "BAL",
+                        "pick2_name": "Baltimore Ravens",
+                        "pick2_score": -3,
+                        "week_total": 0
+                    },
+                    {
+                        "pick_week": 5,
+                        "pick1": "MIA",
+                        "pick1_name": "Miami Dolphins",
+                        "pick1_score": -23,
+                        "pick2": "MIN",
+                        "pick2_name": "Minnesota Vikings",
+                        "pick2_score": 7,
+                        "week_total": -16
+                    }
+                ]
+         */
     } catch (error) {
         response.status(400).json(error.message)
     } finally {
@@ -152,6 +180,7 @@ async function getGamesByWeek(request, response) {
 
 }
 
+//get user info for users in 1st, 2nd, 3rd, 0th, and last place
 async function getLeagueLeaders(request, response) {
     const { leagueID } = request.params;
 

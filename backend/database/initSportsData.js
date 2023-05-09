@@ -1,3 +1,5 @@
+//Run initSportsData as part of installation on production server to populate database with data for tables "teams" and "schedule"
+
 require('dotenv').config();
 
 const axios = require('axios');
