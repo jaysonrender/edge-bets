@@ -23,7 +23,7 @@ export const useLogin = () => {
                 
             }
         }).catch((error) =>{
-            setError(error.response.data.message)
+            setError(error.message)
         });
     }
     
