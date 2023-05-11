@@ -1,4 +1,4 @@
-import {useState, useEffect, /*useMemo*/ } from 'react';
+import { useState, useEffect, /*useMemo*/ } from 'react';
 import { useUserContext } from '../hooks/useUserContext';
 // import {useTable} from 'react-table';
 import axios from 'axios';
@@ -8,7 +8,7 @@ import RemainingPicks from '../components/RemainingPicks';
 
 const UserPicks = () => {
     const [picks, setPicks] = useState(null);
-    const {userID, userToken} = useUserContext();
+    const { userID, userToken } = useUserContext();
 
     useEffect(() => {
         const fetchUserPicks = async () => {
@@ -29,18 +29,18 @@ const UserPicks = () => {
                 <UserStats />
                 {/* {picks && <p>{JSON.stringify(picks)}</p>} */}
                 <div className='row'>
-                <div className='col'>
-                    <UserPickTable />
+                    <div className='col'>
+                        <UserPickTable />
+                    </div>
+                    <div className='col'>
+                        <RemainingPicks />
+                    </div>
                 </div>
-                <div className='col'>
-                    <RemainingPicks />
-                </div>  
             </div>
-            </div>
-            
-            
+
+
         </div>
-        
+
     );
 }
 
