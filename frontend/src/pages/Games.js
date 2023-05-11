@@ -14,7 +14,7 @@ const Games = () => {
     useEffect(() => {
 
         const fetchGames = async () => {
-            const url = `${process.env.REACT_APP_BACKEND}/api/pick/games/${pickWeek}`;
+            const url = `/api/pick/games/${pickWeek}`;
             const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
