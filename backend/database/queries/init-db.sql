@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS teams (
 	
     alias VARCHAR(3) PRIMARY KEY,
-    team_name VARCHAR(40),
+    team_name VARCHAR(40)
 	-- image (file path for team logo image)
 
 );
