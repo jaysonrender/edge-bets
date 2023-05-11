@@ -88,6 +88,16 @@ CREATE VIEW user_score_and_picks AS
 		ON p.pick2 = s2.team_alias and p.pick_week = s2.nfl_week)
 	;
     
+
+
+-- Create a root league and user for dev/testing
+INSERT INTO leagues VALUES('ABCDEF', 'root_league', NULL);
+INSERT INTO users values(1, 'ABCDEF', 'root', 'user', 'root', SHA2('password', 256), 'email@email.com', 'root', 0, 0, 4);
+INSERT INTO pick_list VALUES(1, NULL, NULL, NULL);
+
+UPDATE leagues SET league_admin = '1' WHERE league_id = 'ABCDEF';
+
+
 -- Query to update users scores and ranks when scores table is updated 
 delimiter //
 CREATE TRIGGER update_user_score_rank
@@ -111,13 +121,6 @@ CREATE TRIGGER update_user_score_rank
     END;
     
 // delimiter ;
-
--- Create a root league and user for dev/testing
-INSERT INTO leagues VALUES('ABCDEF', 'root_league', NULL);
-INSERT INTO users values(1, 'ABCDEF', 'root', 'user', 'root', SHA2('password', 256), 'email@email.com', 'root', 0, 0, 4);
-INSERT INTO pick_list VALUES(1, NULL, NULL, NULL);
-
-UPDATE leagues SET league_admin = '1' WHERE league_id = 'ABCDEF';
 
 
 
