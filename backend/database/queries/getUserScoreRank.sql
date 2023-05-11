@@ -1,1 +1,1 @@
-SELECT user_id, username, CONCAT(fname, " ", lname) as fullname, score, player_rank FROM user_score_and_rank WHERE league_id = ? ORDER BY player_rank;
+SELECT user_id, username, CONCAT(fname, " ", lname) as fullname, score, player_rank FROM users WHERE league_id = ? ORDER BY player_rank;
