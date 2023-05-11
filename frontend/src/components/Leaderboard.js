@@ -13,7 +13,7 @@ const Leaderboard = () => {
 
     useEffect(() => {
         const fetchLeaders = async () => {
-            const url = `${process.env.REACT_APP_BACKEND}/api/pick/leagueLeaders/${leagueID}`;
+            const url = `/api/pick/leagueLeaders/${leagueID}`;
             const { data } = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`

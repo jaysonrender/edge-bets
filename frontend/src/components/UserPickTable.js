@@ -9,7 +9,7 @@ const UserPickTable = () => {
 
     useEffect(() => {
         const fetchUserPicks = async () => {
-            const url = `${process.env.REACT_APP_BACKEND}/api/pick/${userID}`;
+            const url = `/api/pick/${userID}`;
             const { data } = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`

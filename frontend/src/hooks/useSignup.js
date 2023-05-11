@@ -11,7 +11,7 @@ export const useSignup = () => {
         
         const requestBody = {leagueID, fname, lname, username, password, email, userType };
         
-        await axios.post(`${process.env.REACT_APP_BACKEND}/api/user/join-league`, requestBody).then(response => {
+        await axios.post(`/api/user/join-league`, requestBody).then(response => {
             
             setError(response.data.message)
             if (response.status === 200){

@@ -10,7 +10,7 @@ export const useSubmitPick = () => {
         
             const requestBody = { userID, pickWeek, pick1, pick2, flexPickStatus } ;
 
-            await axios.post(`${process.env.REACT_APP_BACKEND}/api/pick/submitPick`, requestBody, {
+            await axios.post(`/api/pick/submitPick`, requestBody, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 }

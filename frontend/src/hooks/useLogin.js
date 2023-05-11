@@ -11,8 +11,9 @@ export const useLogin = () => {
         
         const requestBody = {username, password};
         
-        await axios.post(`${process.env.REACT_APP_BACKEND}/api/user/login`, requestBody).then(response => {
+        await axios.post(`/api/user/login`, requestBody).then(response => {
             setError(response.data.message);
+            
 
             if (response.status === 200){
                 localStorage.setItem('user', JSON.stringify(response.data));
@@ -26,8 +27,11 @@ export const useLogin = () => {
         }).catch((error) =>{
             if (error.response){
                 setError(error.response.data.message);
+                
             }
-            else { setError(error.message) }
+            else { 
+                setError(error.message);
+            }
             
         });
     }
