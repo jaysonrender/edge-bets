@@ -1,0 +1,12 @@
+"user_id";"league_id";"fname";"lname";"username";"password_hash";"email";"user_type";"score";"player_rank";"flex_picks"
+1;"ABCDEF";"Jayson";"Render";"root";"b5f7854e64a613b42be89db1dbc5fc30cc3d00ff45e4e1a2eef1339370c49aa6";"render.jayson@gmail.com";"root";-41;6;4
+2;"ABCDEF";"Dave";"Bergen";"dbergen";"61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee";"middnytsunn@gmail.com";"player";72;1;4
+3;"ABCDEF";"Grant";"Babb";"gbabb";"3492ad65d05a973fef8c825521eeb41ae64625a672a8aeeeabc696e16d62a020";"jrender@student.cccs.edu";"admin";-3;5;4
+101;"CB1V7T";"Jayson";"Blender";"jmandaclam";"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8";"notanemail@test.com";"player";1;1;4
+103;"CB1V7T";"Jayson";"Render";"someone";"cdbd9e2968c1f1ad4758d393d93ea6d4633937a277681c1aeae7721a9f32cd3e";"stillnotreal@notreal.com";"player";0;2;4
+110;"PICBQ5";"Bob";"Burger";"bobsburgers";"9c25379c6847d14a05de2cd38be99173b88bc2aa4dff30f8de6a5922970c8d19";"bob@burgers.com";"player";0;1;4
+111;"IMFIM0";"Leopold";"Scotch";"butters";"cdbd9e2968c1f1ad4758d393d93ea6d4633937a277681c1aeae7721a9f32cd3e";"butters@scotch.com";"admin";-6;1;4
+124;"ABCDEF";"Stan";"Marsh";"stanmarsh";"cdbd9e2968c1f1ad4758d393d93ea6d4633937a277681c1aeae7721a9f32cd3e";"stan@marsh.com";"player";20;2;4
+125;"ABCDEF";"Emmitt";"Davies";"emmitt";"cdbd9e2968c1f1ad4758d393d93ea6d4633937a277681c1aeae7721a9f32cd3e";"emmitt@gmail.com";"player";18;3;4
+126;"ABCDEF";"Thomas";"Steinhauser";"thomas";"cdbd9e2968c1f1ad4758d393d93ea6d4633937a277681c1aeae7721a9f32cd3e";"thomas@gmail.com";"player";1;4;4
+136;"PGZ2LQ";"Jayson";"Render";"jayson";"cdbd9e2968c1f1ad4758d393d93ea6d4633937a277681c1aeae7721a9f32cd3e";"email@email.com";"admin";0;0;4
