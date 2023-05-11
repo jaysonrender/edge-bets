@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS babb_picks;
+CREATE DATABASE IF NOT EXISTS edge_bets;
 
-USE babb_picks;
+USE edge_bets;
 
 
 
