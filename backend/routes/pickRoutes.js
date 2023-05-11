@@ -3,7 +3,7 @@
 
 const express = require('express');
 const createConnection = require('../database/dbConnect');
-const { submitPick, getAllPlayersPicksAndScores, getUserPicks, getUserStats, getGamesByWeek, getLeagueLeaders } = require('../controllers/picksController');
+const { submitPick, getAllPlayersPicksAndScores, getUserPicks, getUserStats, getGamesByWeek, getLeagueLeaders, getRemainingPicksByUser} = require('../controllers/picksController');
 const requireAuth = require('../middleware/requireAuth');
 
 const fs = require('fs');
@@ -16,6 +16,7 @@ router.use(requireAuth);
 router.get('/games/:pickWeek', getGamesByWeek);
 router.get('/scoreboard/:leagueID', getAllPlayersPicksAndScores);
 router.get('/:userID', getUserPicks);
+router.get('/picksRemaining/:userID', getRemainingPicksByUser);
 router.get('/stats/:leagueID/:userID', getUserStats);
 router.get('/leagueLeaders/:leagueID', getLeagueLeaders);
 

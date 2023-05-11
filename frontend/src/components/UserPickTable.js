@@ -25,10 +25,10 @@ const UserPickTable = () => {
             <>
                     <th>Week</th>
                     <th>Pick #1</th>
-                    <th className='table-score-column'>Score</th>
+                    <th >Score</th>
                     <th>Pick #2</th>
-                    <th className='table-score-column'>Score</th>
-                    <th className='table-total-column'>Week Total</th>
+                    <th >Score</th>
+                    <th >Week Total</th>
             </>
         )
     }
@@ -38,9 +38,9 @@ const UserPickTable = () => {
             <tr>
                 <td>{pick.pick_week}</td>
                 <td>{pick.pick1_name}</td>
-                <td className='table-score-column'>{pick.pick1_score}</td>
+                <td >{pick.pick1_score}</td>
                 <td>{pick.pick2_name}</td>
-                <td className='table-score-column'>{pick.pick2_score}</td>
+                <td >{pick.pick2_score}</td>
                 <td>{pick.week_total}</td>
 
             </tr>
@@ -52,7 +52,7 @@ const UserPickTable = () => {
 
     return (
         <div className='container'>
-            <table border='1' style={{'borderCollapse' : 'collapse'}} >
+            <table className='table table-borderless' >
                 <thead>
                    <tr>{picks && <UserPicksHeader />}</tr> 
                 </thead>

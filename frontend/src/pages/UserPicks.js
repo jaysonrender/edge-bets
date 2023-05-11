@@ -1,16 +1,44 @@
 import {useState, useEffect, /*useMemo*/ } from 'react';
 import { useUserContext } from '../hooks/useUserContext';
 // import {useTable} from 'react-table';
-// import axios from 'axios';
+import axios from 'axios';
 import UserPickTable from '../components/UserPickTable';
 import UserStats from '../components/UserStats';
+import RemainingPicks from '../components/RemainingPicks';
 
 const UserPicks = () => {
+    const [picks, setPicks] = useState(null);
+    const {userID, userToken} = useUserContext();
+
+    useEffect(() => {
+        const fetchUserPicks = async () => {
+            const url = `/api/pick/${userID}`;
+            const { data } = await axios.get(url, {
+                headers: {
+                    'Authorization': `Bearer ${userToken}`
+                }
+            });
+            setPicks(data);
+        }
+        fetchUserPicks();
+    }, [userID, userToken]);
 
     return (
         <div>
-            <UserStats />
-            <UserPickTable />
+            <div className='container border'>
+                <UserStats />
+                {/* {picks && <p>{JSON.stringify(picks)}</p>} */}
+                <div className='row'>
+                <div className='col'>
+                    <UserPickTable />
+                </div>
+                <div className='col'>
+                    <RemainingPicks />
+                </div>  
+            </div>
+            </div>
+            
+            
         </div>
         
     );

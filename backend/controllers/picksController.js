@@ -92,7 +92,7 @@ async function getAllPlayersPicksAndScores(request, response) {
         const [scoreResults, fields] = await db.execute(scoreQuery, [leagueID], (error, rows, fields) => {
             if (error)
                 console.log(error.message);
-                
+
         });
 
         db.unprepare(scoreQuery);
@@ -204,6 +204,26 @@ async function getLeagueLeaders(request, response) {
     }
 }
 
+async function getRemainingPicksByUser(request, response) {
+    const {userID} = request.params;
+
+    const db = await createConnection();
+    const query = fs.readFileSync('./database/queries/getRemainingPicksByUser.sql', 'utf8');
+
+    try {
+        const [result] = await db.execute(query, [userID, userID], (error, rows, fields) => {
+            if (error)
+                console.log(error);
+        })
+        
+        db.unprepare(query);
+        response.status(200).json(result);
+    } catch (error) {
+        response.status(400).json(error.message);
+    } finally {
+        await db.end();
+    }
+}
 
 //POST methods
 async function submitPick(request, response) {
@@ -257,4 +277,4 @@ async function submitPick(request, response) {
 //change picks
 
 
-module.exports = { submitPick, getAllPlayersPicksAndScores, getUserPicks, getUserStats, getGamesByWeek, getLeagueLeaders };
+module.exports = { submitPick, getAllPlayersPicksAndScores, getUserPicks, getUserStats, getGamesByWeek, getLeagueLeaders, getRemainingPicksByUser };

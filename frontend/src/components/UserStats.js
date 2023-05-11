@@ -36,10 +36,10 @@ const UserStats = () => {
     return (
         <div className='container userStatContainer'>
 
-            <span><strong>Name: </strong>{name}</span>
-            <span><strong>Score: </strong>{score}</span>
-            <span><strong>Rank: </strong>{rank}</span>
-            <span><strong>Flex Picks Remaining: </strong>{flexPicks}/4</span>
+            <span><h4><strong>Name: </strong>{name}</h4></span>
+            <span><h4><strong>Score: </strong>{score}</h4></span>
+            <span><h4><strong>Rank: </strong>{rank}</h4></span>
+            <span><h4><strong>Flex Picks Remaining: </strong>{flexPicks}/4</h4></span>
 
         </div>
 
