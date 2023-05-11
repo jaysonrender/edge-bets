@@ -52,6 +52,7 @@ const UserPickTable = () => {
 
     return (
         <div className='container'>
+            <h4>My Picks</h4>
             <table className='table table-borderless' >
                 <thead>
                    <tr>{picks && <UserPicksHeader />}</tr> 
