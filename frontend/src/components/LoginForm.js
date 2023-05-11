@@ -42,6 +42,8 @@ const LoginForm = () => {
                     <input type = "password" className='form-control' onChange={(event) => setPassword(event.target.value)}>
                     </input>
                 </div>
+                {error && <div id="loginResponse">{error}</div>}
+                <br />
                 <div className='row'>
                     <div className='col'>
                     <button type = "submit" className='btn btn-primary'>Login</button>
@@ -56,7 +58,7 @@ const LoginForm = () => {
                 
                 
             </form>
-            {error && <div id="loginResponse">{error}</div>}
+            
         </div>
     )
 }

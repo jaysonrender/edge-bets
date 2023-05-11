@@ -67,7 +67,7 @@ async function loginUser(request, response) {
 
     //if username or password fields aren't filled
     if (Object.values(request.body).includes("") || Object.values(request.body).includes(null)) {
-        response.status(400).json({ errorMessage: "All fields must be filled" });
+        response.status(400).json({ message: "All fields must be filled" });
     } else {
         //SHA-256 encryption
         const passwordHash = encryptPassword(password);
@@ -96,7 +96,7 @@ async function loginUser(request, response) {
                 await db.end();
             }
         }
-        else { response.status(400).json({ errorMessage: user.errorMessage }) }
+        else { response.status(400).json({ message: user.errorMessage }) }
 
     }
 
