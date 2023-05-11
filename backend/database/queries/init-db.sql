@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(40) UNIQUE,
     user_type SET('root','admin','player'),
     score INT DEFAULT 0,
+    player_rank INT,
     flex_picks INT DEFAULT 4,
     CHECK (flex_picks <= 4 AND flex_picks >= 0)
 );
@@ -42,8 +43,8 @@ CREATE TABLE IF NOT EXISTS pick_list (
 CREATE TABLE IF NOT EXISTS game_schedule (
 	nfl_week INT,
     game_id VARCHAR(36),
-    home INT,
-    away INT,
+    home VARCHAR(3),
+    away VARCHAR(3),
     game_time DATETIME
 );
 
@@ -68,8 +69,8 @@ ALTER TABLE pick_list
 	ADD FOREIGN KEY (pick1) REFERENCES teams(alias) ON UPDATE CASCADE,
     ADD FOREIGN KEY (pick2) REFERENCES teams(alias) ON UPDATE CASCADE;
 ALTER TABLE game_schedule
-	ADD FOREIGN KEY (home) REFERENCES teams(alias) ON UPDATE CASCADE,
-    ADD FOREIGN KEY (away) REFERENCES teams(alias) ON UPDATE CASCADE;
+	ADD FOREIGN KEY (home) REFERENCES teams(alias),
+    ADD FOREIGN KEY (away) REFERENCES teams(alias);
 
 
 
@@ -111,7 +112,7 @@ CREATE TRIGGER update_user_score_rank
     
 // delimiter ;
 
---Create a root league and user for dev/testing
+-- Create a root league and user for dev/testing
 INSERT INTO leagues VALUES('ABCDEF', 'root_league', NULL);
 INSERT INTO users values(1, 'ABCDEF', 'root', 'user', 'root', SHA2('password', 256), 'email@email.com', 'root', 0, 0, 4);
 INSERT INTO pick_list VALUES(1, NULL, NULL, NULL);
