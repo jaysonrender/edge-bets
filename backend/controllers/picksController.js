@@ -91,7 +91,8 @@ async function getAllPlayersPicksAndScores(request, response) {
         //first query pulls user's name score and rank
         const [scoreResults, fields] = await db.execute(scoreQuery, [leagueID], (error, rows, fields) => {
             if (error)
-                console.log(error);
+                console.log(error.message);
+                
         });
 
         db.unprepare(scoreQuery);
@@ -103,7 +104,7 @@ async function getAllPlayersPicksAndScores(request, response) {
 
             const [pickResults, fields] = await db.execute(picksQuery, [userID], (error, rows, fields) => {
                 if (error)
-                    console.log(error);
+                    console.log(error.message);
             });
             Object.assign(formattedResult[i], { picks: pickResults })
 
