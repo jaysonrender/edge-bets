@@ -241,17 +241,27 @@ async function submitPick(request, response) {
     //query all users picks
     //if pick1 or pick2 in results
     //send bad response
-    //if flexPickStatus = false;
+    //if flexPickStatus = true;
 
     const query = fs.readFileSync('./database/queries/insertPicks.sql', 'utf8');
+    const flexQuery = fs.readFileSync('./database/queries/updateUserFlexPick.sql', 'utf8');
     try {
         await db.execute(query, [userID, pickWeek, pick1, pick2], (error, rows, fields) => {
             if (error)
                 throw error;
         });
         db.unprepare(query);
+        if (flexPickStatus > 0) {
+
+            await db.execute(flexQuery, [flexPickStatus, userID], (error, rows, fields) => {
+                if (error)
+                    throw error;
+            });
+        }
+         
         db.end((error) => {
             if (error)
+                console.log(error);
                 response.status(400).json({ errorMessage: error.message })
         });
         response.status(200).json({ message: 'Pick successfully submitted!' });

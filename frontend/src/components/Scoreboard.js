@@ -19,7 +19,8 @@ const Scoreboard = () => {
             <>
                 <th className='table-name-column'>Name</th>
                 <th >Rank</th>
-                <th className="table-total-column">Score</th>
+                <th className="table-name-column">Score</th>
+                <th className='table-total-column'>Flex Picks</th>
             </>
             ));
         for (let i = 0; i < maxLength; i++){
@@ -52,7 +53,8 @@ const Scoreboard = () => {
                 <>
                     <td className='border-end border-2 border-black' style = {{"whiteSpace": "nowrap"}}>{player.fullname}</td>
                     <td className='border-end border-2 border-black'>{player.player_rank}</td>
-                    <td className='table-total-column'>{player.score}</td>
+                    <td className='border-end border-2 border-black'>{player.score}</td>
+                    <td className='table-total-column'>{player.flex_picks}</td>
                 </>
             ));
 

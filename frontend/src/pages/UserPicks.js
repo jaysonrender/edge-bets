@@ -1,5 +1,6 @@
 import { useState, useEffect, /*useMemo*/ } from 'react';
 import { useUserContext } from '../hooks/useUserContext';
+import { useLogout } from '../hooks/useLogout'
 // import {useTable} from 'react-table';
 import axios from 'axios';
 import UserPickTable from '../components/UserPickTable';
@@ -9,6 +10,7 @@ import RemainingPicks from '../components/RemainingPicks';
 const UserPicks = () => {
     const [picks, setPicks] = useState(null);
     const { userID, userToken } = useUserContext();
+    const { logout } = useLogout();
 
     useEffect(() => {
         const fetchUserPicks = async () => {
@@ -17,8 +19,12 @@ const UserPicks = () => {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 }
+            }).catch((error) => {
+                if (error.response)
+                    logout();
             });
             setPicks(data);
+            console.log(data);
         }
         fetchUserPicks();
     }, [userID, userToken]);
@@ -27,7 +33,7 @@ const UserPicks = () => {
         <div>
             <div className='container border'>
                 <UserStats />
-                {/* {picks && <p>{JSON.stringify(picks)}</p>} */}
+                
                 <div className='row'>
                     <div className='col'>
                         <UserPickTable />

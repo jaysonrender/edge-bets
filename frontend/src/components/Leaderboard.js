@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 
 import { useUserContext } from "../hooks/useUserContext";
+import { useLogout } from "../hooks/useLogout";
 
 const Leaderboard = () => {
     const [leaders, setLeaders] = useState([]);
 
     const { leagueID, userToken } = useUserContext();
+    const { logout } = useLogout();
 
 
     useEffect(() => {
@@ -18,6 +20,9 @@ const Leaderboard = () => {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 }
+            }).catch((error) => {
+                if (error.response)
+                    logout();
             });
             
             setLeaders(data);

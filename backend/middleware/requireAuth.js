@@ -18,7 +18,7 @@ async function requireAuth(request, response, next) {
 
     try{
         const { leagueID, userID } = jwt.verify(token, process.env.JWT_SECRET);
-        
+                
         const query = fs.readFileSync('./database/queries/getUserByID.sql', 'utf8');
         const [result] = await db.execute(query, [leagueID, userID], (error, results, fields) => {
             if (error){

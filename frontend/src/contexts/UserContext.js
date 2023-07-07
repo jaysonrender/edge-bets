@@ -24,7 +24,7 @@ export const UserContextProvider = ({children}) => {
     useEffect(() => {
         
         if(!user)
-        dispatch({type: 'LOGOUT'});    
+            dispatch({type: 'LOGOUT'});    
 
     },[]);
 
