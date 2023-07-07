@@ -34,7 +34,7 @@ const PickForm = () => {
             </Modal>
         )
     }
-    
+
     const WarningModalBody = () => {
         if (flexPicksRemaining === 0 && flexPickStatus > 0) {
             return (
@@ -246,7 +246,7 @@ const PickForm = () => {
 
 
             </div>
-            <button onClick={handlePicks}>TEST</button>
+            
             <FlexWarningModal show={showFlexWarning} onHide={() => setShow(false)} />
         </>
     )
