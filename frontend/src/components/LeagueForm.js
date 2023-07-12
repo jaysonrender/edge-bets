@@ -12,6 +12,7 @@ import SignupForm from './SignupForm';
 const LeagueForm = () => {
 
     const [leagueName, setLeagueName] = useState(null);
+    const [password, setPassword] = useState(null);
     const [leagueID, setLeagueID] = useState(null);
     const [error, setError] = useState(null);
 
@@ -20,6 +21,13 @@ const LeagueForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const requestBody = { leagueName };
+
+        if(password !== process.env.REACT_APP_LEAGUE_PASSCODE){
+            console.log(password);
+            console.log(process.env.REACT_APP_LEAGUE_PASSCODE);
+            setError('Password for league creation is incorrect');
+            return;
+        }
 
         await axios.post(`/api/user/create-league`, requestBody).then(response => {
             if (response.status === 200) {
@@ -56,11 +64,15 @@ const LeagueForm = () => {
             <div className="container border rounded-2" style={{ "padding": "10px" }} >
                 {!leagueID &&
                     <form className="leagueForm" onSubmit={handleSubmit}>
-                        <label>Enter a name for your league</label>
+                        <h5>Enter a name for your league, as well as password you were given to create a league</h5>
                         <div className='row'>
-                            <div className='col'>
-
+                            <div className='col mb-3'>
+                                <label>League Name</label>
                                 <input type="text" className='form-control' onChange={(event) => setLeagueName(event.target.value)}></input>
+                            </div>
+                            <div className='col mb-3'>
+                                <label>Password</label>   
+                                <input type ='text' className='form-control' onChange={(event) => setPassword(event.target.value)}></input>
                             </div>
                         </div>
                         {error && <div>{error}</div>}

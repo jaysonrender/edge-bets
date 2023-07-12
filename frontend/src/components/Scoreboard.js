@@ -1,6 +1,7 @@
 import { useState, useEffect /*, useMemo*/ } from 'react';
 import { useUserContext } from '../hooks/useUserContext';
 import axios from 'axios';
+import {useLogout} from '../hooks/useLogout';
 
 // might use react-table for table building down the line but having trouble getting to work right now
 // import { useTable } from 'react-table';
@@ -9,6 +10,7 @@ import axios from 'axios';
 const Scoreboard = () => {
     const [scores, setScores] = useState(null);
     const { leagueID, userID, userToken } = useUserContext();
+    const { logout } = useLogout();
     
     const ScoreboardHeaders = () => {
       
@@ -129,6 +131,9 @@ const Scoreboard = () => {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 }
+            }).catch((error) => {
+                if (error.response)
+                    logout();
             });
 
             setScores(data);

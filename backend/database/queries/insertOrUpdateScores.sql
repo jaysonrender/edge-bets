@@ -1,0 +1,1 @@
+INSERT INTO scores VALUES (?, ? , ?) ON DUPLICATE KEY UPDATE score = ?;

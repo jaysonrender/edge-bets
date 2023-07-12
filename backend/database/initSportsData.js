@@ -12,6 +12,7 @@ async function getTeams() {
     let parsedResult = [];
     const result = await axios.get("https://api.sportradar.us/nfl/official/trial/v7/en/league/hierarchy.json?api_key=" + process.env.API_KEY);
     
+    //TODO: REFACTOR FOR NEW API KEY (ESPN?)
     //get team alias (primary key for database), and team name
     for(let i = 0; i < 2; i++){ //2 conferences in NFL
         for(let j = 0; j < 4; j++){ //4 divisions
@@ -31,22 +32,29 @@ async function getTeams() {
 async function getGameSchedule(){
     
     //Change year 2022 to current year and REG to PRE or POST depending on season
-    const result = await axios.get('https://api.sportradar.us/nfl/official/trial/v7/en/games/2022/REG/schedule.json?api_key=' + process.env.API_KEY);
-    let weeks = [...result.data.weeks];
-    let parsedResult = [];
+    // const result = await axios.get('https://api.sportradar.us/nfl/official/trial/v7/en/games/2022/REG/schedule.json?api_key=' + process.env.API_KEY);
+
+    const {data} = await axios.get("https://api.mysportsfeeds.com/v2.1/pull/nfl/2023-2024-pre/games.json", 
+    {
+        headers: {
+            'Authorization': `Basic ${process.env.NEW_API_KEY}`
+        }
+    });
     
     //get game_id, home, away, game_time for database "game_schedule" table
-    for (let i = 0; i < weeks.length; i++){
-        for (let j = 0; j < weeks[i].games.length; j++){
-            let gameID = weeks[i].games[j].id;
-            let homeAlias = weeks[i].games[j].home.alias;
-            let awayAlias = weeks[i].games[j].away.alias;
-            let gameTime = weeks[i].games[j].scheduled;
-            let entry = {nfl_week: i + 1, game_id: gameID, home: homeAlias, away: awayAlias, game_time: gameTime};
-            parsedResult.push(entry);
-        }
+    let parsedResult = [];
+    for (game of data.games) {
+        let season = '2023PRE';
+        let week = game.schedule.week;
+        let gameID = game.schedule.id.toString();
+        let homeAlias = game.schedule.homeTeam.abbreviation;
+        let awayAlias = game.schedule.awayTeam.abbreviation;
+        let gameTime = game.schedule.startTime.split(0, -1);
+
+        let entry = {season: season, nfl_week: week, game_id: gameID, home: homeAlias, away: awayAlias, game_time: gameTime};
+        parsedResult.push(entry);
     }
-    
+       
     return parsedResult;
     
 

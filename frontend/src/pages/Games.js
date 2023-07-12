@@ -3,6 +3,7 @@ import axios from 'axios';
 import GameDetails from '../components/GameDetails';
 import WeekOptions from '../components/WeekOptions';
 import { useUserContext } from '../hooks/useUserContext';
+import { useLogout } from '../hooks/useLogout';
 
 const Games = () => {
 
@@ -10,6 +11,7 @@ const Games = () => {
     const [pickWeek, setPickWeek] = useState(1);
     
     const { userToken } = useUserContext();
+    const { logout } = useLogout();
 
     useEffect(() => {
 
@@ -19,6 +21,9 @@ const Games = () => {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 }
+            }).catch((error) => {
+                if (error.response)
+                    logout();
             });
             const data = response.data;
             
